@@ -5,6 +5,10 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Produit;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Model as Eloquent;
+
+
 
 class ProduitSeeder extends Seeder
 {
@@ -13,6 +17,10 @@ class ProduitSeeder extends Seeder
      */
     public function run(): void
     {
+        Eloquent::unguard();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
         Produit::truncate();
 
         $csvFile = fopen(base_path("/data/Produits.txt"), "r");
@@ -28,7 +36,7 @@ class ProduitSeeder extends Seeder
                     'expirationDate' => $data[4],
                     'UnitWeight' => $data[5],
                     'thumbnail' => $data[6],
-                    'category-id' => $data[7],
+                    'category_id' => $data[7],
                 ]);
             }
             $firstline = false;

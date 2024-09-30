@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('produit', function (Blueprint $table) {
+        Schema::create('produits', function (Blueprint $table) {
             $table->id();
             $table->string('Name');
             $table->integer('quantity');
@@ -20,9 +20,10 @@ return new class extends Migration
             $table->date('expirationDate');
             $table->float('UnitWeight');
             $table->string('thumbnail');
-            $table->foreignId('category-id')
-                ->references('id')->on('categorie');
+            $table->unsignedBigInteger('category_id');
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
