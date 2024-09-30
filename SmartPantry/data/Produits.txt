@@ -1,0 +1,5 @@
+Name,quantity,price,addedDate,expirationDate,UnitWeight,thumbnail,category-id
+Carotte,5,1.5,2021-03-01,2021-03-10,0,125,https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lesfruitsetlegumesfrais.com%2Ffruits-legumes%2Flegumes%2Fcarotte&psig=AOvVaw0,1
+Pomme,10,1.5,2021-03-01,2021-03-10,0,150,https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lesfruitsetlegumesfrais.com%2Ffruits-legumes%2Flegumes%2Fcarotte&psig=AOvVaw0,2
+Banane,10,1.5,2021-03-01,2021-03-10,0.150,https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lesfruitsetlegumesfrais.com%2Ffruits-legumes%2Flegumes%2Fcarotte&psig=AOvVaw0,2
+Kiwi,10,1.5,2021-03-01,2021-03-10,0.100,https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lesfruitsetlegumesfrais.com%2Ffruits-legumes%2Flegumes%2Fcarotte&psig=AOvVaw0,2
