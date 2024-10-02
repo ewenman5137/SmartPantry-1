@@ -5,6 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Produit;
+use Illuminate\Support\Facades\Storage;
+
+
 
 class ProduitsController extends Controller
 {
@@ -21,13 +24,46 @@ class ProduitsController extends Controller
 
     public function store(Request $request)
     {
-        $produits = Produit::create($request->all());
+        $validated = $request->validate([
+            'Name' => 'required | unique:produits',
+            'quantity' => 'required | integer',
+            'price' => 'required | float',
+            "addedDate" => 'required | date',
+            'expirationDate' => 'required | date',
+            'unitWeight' => 'required | float',
+            'thumbnail' => 'required',
+        ]);
+
+        $produits = Produit::create([
+            'Name' => $request->input('Name'),
+            'quantity' => $request->input('quantity'),
+            'price' => $request->input('price'),
+            'addedDate' => $request->input('addedDate'),
+            'expirationDate' => $request->input('expirationDate'),
+            'unitWeight' => $request->input('unitWeight'),
+            'thumbnail' => $request->input('thumbnail'),
+        ]);
+
+        $thumbnail = $request->file('thumbnail');
+        $request->file('thumbnail')->move('public', $thumbnail);
+
         return response()->json($produits, 201);
     }
 
     public function update(Request $request, Produit $produits)
     {
-        $produits->update($request->all());
+        $validated = $request->validate([
+            'quantity' => 'required | integer',
+            "addedDate" => 'required | date',
+            'expirationDate' => 'required | date',
+        ]);
+
+        $produits->update([
+            'quantity' => $request->input('quantity'),
+            'addedDate' => $request->input('addedDate'),
+            'expirationDate' => $request->input('expirationDate'),
+        ]);
+
         return response()->json($produits, 200);
     }
 

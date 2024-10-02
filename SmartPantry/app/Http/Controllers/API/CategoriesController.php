@@ -21,13 +21,32 @@ class CategoriesController extends Controller
 
     public function store(Request $request)
     {
-        $categories = Categorie::create($request->all());
+        $validated = $request->validate([
+            'Name' => 'required | unique:categories',
+            'thumbnail' => 'required',
+        ]);
+
+        $categories = Categorie::create([
+            'Name' => $request->input('Name'),
+            'thumbnail' => $request->input('thumbnail'),
+        ]);
+
+        $thumbnail = $request->file('thumbnail');
+        $request->file('thumbnail')->move('public', $thumbnail);
+
         return response()->json($categories, 201);
     }
 
     public function update(Request $request, Categorie $categories)
     {
-        $categories->update($request->all());
+        $validated = $request->validate([
+            'Name' => 'required | unique:categories',
+            'thumbnail' => 'required',
+        ]);
+
+        $categories->Name = $request->input('Name');
+        $categories->thumbnail = $request->input('thumbnail');
+        $categories->save();
         return response()->json($categories, 200);
     }
 
