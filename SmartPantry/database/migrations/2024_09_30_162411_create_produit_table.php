@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('produits', function (Blueprint $table) {
             $table->id();
             $table->string('Name');
-            $table->integer('quantity');
-            $table->float('price');
+            $table->float('quantity');
             $table->date('addedDate');
             $table->date('expirationDate');
-            $table->float('UnitWeight');
+            $table->string('Unit');
             $table->string('thumbnail');
             $table->unsignedBigInteger('category_id');
             $table->timestamps();
