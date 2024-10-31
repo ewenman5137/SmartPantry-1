@@ -9,6 +9,11 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
+    protected $table = 'users';
+    protected $casts = [
+        'pantry' => 'array',
+    ];
     use HasFactory, Notifiable;
 
     /**
