@@ -19,6 +19,29 @@ class DatabaseSeeder extends Seeder
             'FirstName' => 'Test',
             'LastName' => 'User',
             'email' => 'test@example.com',
+            'password' => bcrypt('password'),
+            'pantry' => [
+                'items' => [
+                    [
+                        'name' => 'Milk',
+                        'quantity' => 1,
+                        'unit' => 'gallon',
+                        'expiration' => '2021-12-31',
+                    ],
+                    [
+                        'name' => 'Eggs',
+                        'quantity' => 12,
+                        'unit' => 'count',
+                        'expiration' => '2021-12-31',
+                    ],
+                    [
+                        'name' => 'Bread',
+                        'quantity' => 1,
+                        'unit' => 'loaf',
+                        'expiration' => '2021-12-31',
+                    ],
+                ],
+            ],
         ]);
     }
 }
