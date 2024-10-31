@@ -67,4 +67,62 @@ class AuthController extends Controller
             'message' => 'Logged out',
         ]);
     }
+
+    public function user(Request $request)
+    {
+        return response()->json($request->user());
+    }
+
+    public function UpdatePassword(Request $request)
+    {
+        $validatedData = $request->validate([
+            'password' => 'required|string|min:8|confirmed|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[^a-zA-Z0-9]/',
+        ]);
+
+        $user = User::where('FirstName', $validatedData['FirstName'])->firstOrFail();
+
+        $user->update([
+            'password' => static::$password ??= Hash::make($validatedData['password']),
+        ]);
+
+        return response()->json([
+            'message' => 'Password updated',
+        ]);
+    }
+
+    public function UpdateEmail(Request $request)
+    {
+        $validatedData = $request->validate([
+            'email' => 'required|string|email|max:255|unique:users|email:rfc,dns|regex:/^.+@.+$/i',
+        ]);
+
+        $user = User::where('FirstName', $validatedData['FirstName'])->firstOrFail();
+
+        $user->update([
+            'email' => $validatedData['email'],
+        ]);
+
+        return response()->json([
+            'message' => 'Email updated',
+        ]);
+    }
+
+    public function UpdateName(Request $request)
+    {
+        $validatedData = $request->validate([
+            'FirstName' => 'required|string|max:255',
+            'LastName' => 'required|string|max:255',
+        ]);
+
+        $user = User::where('FirstName', $validatedData['FirstName'])->firstOrFail();
+
+        $user->update([
+            'FirstName' => $validatedData['FirstName'],
+            'LastName' => $validatedData['LastName'],
+        ]);
+
+        return response()->json([
+            'message' => 'Name updated',
+        ]);
+    }
 }
