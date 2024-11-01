@@ -2,12 +2,16 @@
 
 namespace Database\Seeders;
 
+use App\Models\Produit;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
+
+
     /**
      * Seed the application's database.
      */
@@ -15,33 +19,31 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        $user = User::factory()->create([
             'FirstName' => 'Test',
             'LastName' => 'User',
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
-            'pantry' => [
-                'items' => [
-                    [
-                        'name' => 'Milk',
-                        'quantity' => 1,
-                        'unit' => 'gallon',
-                        'expiration' => '2021-12-31',
-                    ],
-                    [
-                        'name' => 'Eggs',
-                        'quantity' => 12,
-                        'unit' => 'count',
-                        'expiration' => '2021-12-31',
-                    ],
-                    [
-                        'name' => 'Bread',
-                        'quantity' => 1,
-                        'unit' => 'loaf',
-                        'expiration' => '2021-12-31',
-                    ],
-                ],
-            ],
         ]);
+        $prod1 = Produit::create([
+            'Name' => 'Test Product',
+            'quantity' => 1,
+            'addedDate' => now(),
+            'expirationDate' => now()->addDays(7),
+            'Unit' => 'g',
+            'thumbnail' => 'https://via.placeholder.com/150',
+            'category_id' => 1,
+        ]);
+        $prod2 = Produit::create([
+            'Name' => 'Test Product 2',
+            'quantity' => 2,
+            'addedDate' => now(),
+            'expirationDate' => now()->addDays(14),
+            'Unit' => 'g',
+            'thumbnail' => 'https://via.placeholder.com/150',
+            'category_id' => 2,
+        ]);
+
+        $user->produits()->attach([$prod1->id, $prod2->id]);
     }
 }

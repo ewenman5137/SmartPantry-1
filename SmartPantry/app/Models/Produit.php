@@ -27,10 +27,13 @@ class Produit extends Model
         'category_id',
     ];
 
-
-
     public function category(): BelongsTo
     {
         return $this->belongsTo(Categorie::class, 'id');
+    }
+
+    public function users(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id');
     }
 }
