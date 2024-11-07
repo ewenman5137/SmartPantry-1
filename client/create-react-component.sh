@@ -54,4 +54,4 @@ echo "  expect(linkElement).toBeInTheDocument();" >> "${COMPONENTE}.test.js"
 echo "});" >> "${COMPONENTE}.test.js"
 
 # Inform the user everything was OK
-echo "React component '$COMPONENTE' created in folder '$CARPETA'."
+echo "React component '$COMPONENTE' created in folder '$CARPETA'."’
