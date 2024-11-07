@@ -13,9 +13,8 @@ class User extends Authenticatable
 {
 
     protected $table = 'users';
-    protected $casts = [
-        'pantry' => 'array',
-    ];
+    protected $primaryKey = 'id';
+
     use HasFactory, Notifiable;
 
     /**
@@ -24,10 +23,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'FirstName',
-        'LastName',
-        'email',
-        'password',
+        'Name',
+        'Email',
+        'Password',
     ];
 
     /**
@@ -36,8 +34,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'Password',
+        'Remember_token',
     ];
 
     /**
@@ -48,8 +46,8 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'Email_verified_at' => 'datetime',
+            'Password' => 'hashed',
         ];
     }
 
@@ -61,6 +59,7 @@ class User extends Authenticatable
 
     public function produits(): BelongsToMany
     {
-        return $this->belongsToMany(Produit::class);
+        return $this->belongsToMany(Produit::class, 'produit_user', 'user_id', 'produit_id')
+            ->withPivot('Date_Ajout', 'Date_Expiration');
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Produit extends Model
 {
@@ -13,18 +14,12 @@ class Produit extends Model
 
     protected $table = 'produits';
     protected $primaryKey = 'id';
-    public $timestamps = true;
     protected $guarded = [];
 
     protected $fillable = [
         'Name',
         'quantity',
-        'price',
-        'addedDate',
-        'expirationDate',
-        'UnitWeight',
-        'thumbnail',
-        'category_id',
+        'Unit',
     ];
 
     public function category(): BelongsTo
@@ -32,8 +27,8 @@ class Produit extends Model
         return $this->belongsTo(Categorie::class, 'id');
     }
 
-    public function users(): BelongsTo
+    public function users(): BelongsToMany
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsToMany(User::class, 'id');
     }
 }

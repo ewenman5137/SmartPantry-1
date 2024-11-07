@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('produit_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('produit_id')->references('id')->on('produits')
+            $table->foreignId('Produit_id')->references('id')->on('produits')
                 ->onDelete('cascade');
-            $table->foreignId('user_id')->references('id')->on('users')
+            $table->foreignId('User_id')->references('id')->on('users')
                 ->onDelete('cascade');
-
-            $table->timestamps();
+            $table->date('Date_Ajout');
+            $table->date('Date_Expiration');
         });
     }
 

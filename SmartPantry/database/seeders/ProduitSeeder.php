@@ -31,11 +31,7 @@ class ProduitSeeder extends Seeder
                 Produit::create([
                     'Name' => $data[0],
                     'quantity' => $data[1],
-                    'addedDate' => $data[2],
-                    'expirationDate' => $data[3],
-                    'Unit' => $data[4],
-                    'thumbnail' => $data[5],
-                    'category_id' => $data[6],
+                    'Unit' => $data[2],
                 ]);
             }
             $firstline = false;

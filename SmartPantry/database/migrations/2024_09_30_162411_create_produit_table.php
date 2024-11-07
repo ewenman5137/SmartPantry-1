@@ -14,15 +14,9 @@ return new class extends Migration
         Schema::create('produits', function (Blueprint $table) {
             $table->id();
             $table->string('Name');
-            $table->float('quantity');
-            $table->date('addedDate');
-            $table->date('expirationDate');
+            $table->double('Quantity');
             $table->string('Unit');
-            $table->string('thumbnail');
-            $table->unsignedBigInteger('category_id');
             $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

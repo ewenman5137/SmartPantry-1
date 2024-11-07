@@ -20,30 +20,22 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $user = User::factory()->create([
-            'FirstName' => 'Test',
-            'LastName' => 'User',
-            'email' => 'test@example.com',
-            'password' => bcrypt('password'),
+            'Name' => fake()->name,
+            'Email' => 'test2@example.com',
+            'Password' => bcrypt('password'),
         ]);
         $prod1 = Produit::create([
-            'Name' => 'Test Product',
-            'quantity' => 1,
-            'addedDate' => now(),
-            'expirationDate' => now()->addDays(7),
+            'Name' => 'test',
+            'Quantity' => 1,
             'Unit' => 'g',
-            'thumbnail' => 'https://via.placeholder.com/150',
-            'category_id' => 1,
         ]);
         $prod2 = Produit::create([
-            'Name' => 'Test Product 2',
-            'quantity' => 2,
-            'addedDate' => now(),
-            'expirationDate' => now()->addDays(14),
+            'Name' => 'test2',
+            'Quantity' => 2,
             'Unit' => 'g',
-            'thumbnail' => 'https://via.placeholder.com/150',
-            'category_id' => 2,
         ]);
 
-        $user->produits()->attach([$prod1->id, $prod2->id]);
+        $user->produits()->attach($prod1->id, ['Date_Ajout' => now(), 'Date_Expiration' => now()->addDays(7)]);
+        $user->produits()->attach($prod2->id, ['Date_Ajout' => now(), 'Date_Expiration' => now()->addDays(7)]);
     }
 }

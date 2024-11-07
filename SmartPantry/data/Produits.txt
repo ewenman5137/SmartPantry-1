@@ -1,6 +1,6 @@
-Name,quantity,,addedDate,expirationDate,UnitWeight,thumbnail,category_id
-Carotte,5,2021-03-01,2021-03-10,unité,https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lesfruitsetlegumesfrais.com%2Ffruits-legumes%2Flegumes%2Fcarotte&psig=AOvVaw0,1,
-Pomme,10,2021-03-01,2021-03-10,unité,https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lesfruitsetlegumesfrais.com%2Ffruits-legumes%2Flegumes%2Fcarotte&psig=AOvVaw0,2,
-Banane,10,2021-03-01,2021-03-10,unité,https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lesfruitsetlegumesfrais.com%2Ffruits-legumes%2Flegumes%2Fcarotte&psig=AOvVaw0,2,
-Kiwi,10,2021-03-01,2021-03-10,unité,https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lesfruitsetlegumesfrais.com%2Ffruits-legumes%2Flegumes%2Fcarotte&psig=AOvVaw0,2,
-Pâtes,500,2021-03-01,2021-03-10,gramme,https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lesfruitsetlegumesfrais.com%2Ffruits-legumes%2Flegumes%2Fcarotte&psig=AOvVaw0,5,
+Name,quantity,Unit
+Tomato,5,unité
+Pomme,10,unité
+Banane,10,unité
+Kiwi,10,unité
+Pates,500,gramme
