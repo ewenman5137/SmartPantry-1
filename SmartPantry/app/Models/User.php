@@ -7,15 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
 
-    protected $table = 'users';
-    protected $primaryKey = 'id';
-
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -24,8 +21,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'Name',
-        'Email',
-        'Password',
+        'email',
+        'password',
     ];
 
     /**
@@ -34,7 +31,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'Password',
+        'password',
         'Remember_token',
     ];
 
@@ -47,15 +44,8 @@ class User extends Authenticatable
     {
         return [
             'Email_verified_at' => 'datetime',
-            'Password' => 'hashed',
         ];
     }
-
-    /**
-     * Get the pantry for the user.
-     *
-     * @return array<string, mixed>
-     */
 
     public function produits(): BelongsToMany
     {

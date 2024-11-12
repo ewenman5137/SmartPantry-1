@@ -9,22 +9,21 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    protected static ?string $password;
 
     public function login(Request $request)
     {
-        $validatedData = $request->validate([
-            'FirstName' => 'required|string|max:255',
-            'LastName' => 'required|string|max:255',
-            'password' => 'required|string|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[^a-zA-Z0-9]/',
+        $request->validate([
+            'email' => 'required|string|email|max:255|exists:users|email:rfc,dns|regex:/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$',
+            'password' => 'required|string|min:4|max:255|regex:/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/"',
         ]);
 
-        if (!Auth::attempt($request->only('FirstName', 'LastName', 'password'))) {
-            return response()->json(['message' => 'Invalid login details'], 401);
+        $user = User::where('email', $request['email'])->first();
+
+        if (! $user || ! Hash::check($request['password'], $user->password)) {
+            return response()->json([
+                'message' => 'Unauthorized',
+            ], 401);
         }
-
-        $user = User::where('FirstName', $validatedData['FirstName'])->firstOrFail();
-
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -37,18 +36,16 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $validatedData = $request->validate([
-            'FirstName' => 'required|string|max:255',
-            'LastName' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users|email:rfc,dns|regex:/^.+@.+$/i',
-            'password' => 'required|string|min:8|confirmed|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[^a-zA-Z0-9]/',
+            'Name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'password' => 'required',
 
         ]);
 
         $user = User::create([
-            'FirstName' => $validatedData['FirstName'],
-            'LastName' => $validatedData['LastName']->unique()->safeEmail(),
+            'Name' => $validatedData['Name'],
             'email' => $validatedData['email'],
-            'password' => static::$password ??= Hash::make($validatedData['password']),
+            'password' => Hash::make($validatedData['password']),
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
@@ -76,13 +73,13 @@ class AuthController extends Controller
     public function UpdatePassword(Request $request)
     {
         $validatedData = $request->validate([
-            'password' => 'required|string|min:8|confirmed|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[^a-zA-Z0-9]/',
+            'password' => 'required',
         ]);
 
-        $user = User::where('FirstName', $validatedData['FirstName'])->firstOrFail();
+        $user = User::where('email', $request['email'])->firstOrFail();
 
         $user->update([
-            'password' => static::$password ??= Hash::make($validatedData['password']),
+            'password' => Hash::make($validatedData['password']),
         ]);
 
         return response()->json([
@@ -96,7 +93,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users|email:rfc,dns|regex:/^.+@.+$/i',
         ]);
 
-        $user = User::where('FirstName', $validatedData['FirstName'])->firstOrFail();
+        $user = User::where('email', $request['email'])->firstOrFail();
 
         $user->update([
             'email' => $validatedData['email'],
@@ -110,15 +107,13 @@ class AuthController extends Controller
     public function UpdateName(Request $request)
     {
         $validatedData = $request->validate([
-            'FirstName' => 'required|string|max:255',
-            'LastName' => 'required|string|max:255',
+            'Name' => 'required|string|max:255',
         ]);
 
-        $user = User::where('FirstName', $validatedData['FirstName'])->firstOrFail();
+        $user = User::where('email', $request['email'])->firstOrFail();
 
         $user->update([
-            'FirstName' => $validatedData['FirstName'],
-            'LastName' => $validatedData['LastName'],
+            'Name' => $validatedData['Name'],
         ]);
 
         return response()->json([
