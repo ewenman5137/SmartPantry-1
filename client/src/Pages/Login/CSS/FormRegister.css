@@ -38,7 +38,7 @@ form .InputContainer label {
     transform: translateY(-50%);
 }
 
-form .InputContainer input {
+form .InputContainer input.input {
     width: 20vw;
     padding: 10px;
     border: 1.5px solid #7c4b3e;

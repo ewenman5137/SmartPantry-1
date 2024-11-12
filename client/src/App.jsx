@@ -6,8 +6,8 @@ import Login from "./Pages/Login/Login";
 export default function App() {
   return (
     <Routes>
-      <Route path="/Home" element={<Home />} />
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 }
