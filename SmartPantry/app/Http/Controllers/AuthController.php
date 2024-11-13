@@ -13,8 +13,8 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email|max:255|exists:users|email:rfc,dns|regex:/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$',
-            'password' => 'required|string|min:4|max:255|regex:/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/"',
+            'email' => 'required|string|email|max:255|exists:users|email:rfc,dns|regex:/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/i',
+            'password' => 'required|string|min:4|max:255',
         ]);
 
         $user = User::where('email', $request['email'])->first();
@@ -37,9 +37,8 @@ class AuthController extends Controller
     {
         $validatedData = $request->validate([
             'Name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'password' => 'required',
-
+            'email' => 'required|string|email|max:255|unique:users|email:rfc,dns|regex:/^.+@.+$/i',
+            'password' => 'required|string|min:4|max:255|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
         ]);
 
         $user = User::create([
