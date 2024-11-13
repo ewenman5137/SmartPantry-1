@@ -1,8 +1,8 @@
 import React from "react";
 
 export default function Home() {
-  if (!localStorage.getItem("token")) {
-    window.location.href = "/Login";
+  if (!localStorage.getItem("access_token")) {
+    window.location.href = "/login";
   }
   return (
     <div>

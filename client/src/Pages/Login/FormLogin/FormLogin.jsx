@@ -10,6 +10,8 @@ export default function FormLogin() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const tl = gsap.timeline();
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,13 +24,13 @@ export default function FormLogin() {
       if (response.data) {
         localStorage.setItem("access_token", response.data.access_token);
         setTimeout(() => {
-          // Animate the transition with gsap
+          // Animate the transition with gsap tl
           gsap.fromTo(
             ".transition",
             {
               // y: "-100vh",
               top: "57rem",
-              duration: 2,
+              duration: 1,
               opacity: 1,
               zIndex: 1,
             },
@@ -39,10 +41,16 @@ export default function FormLogin() {
               zIndex: 1,
               ease: "back.out(1.7)",
               onComplete: () => {
-                navigate("/Home");
+                navigate("/");
               },
             }
           );
+          tl.to(".bi-check-circle", {
+            delay: 0.5,
+            rotate: 360,
+            duration: 2,
+            ease: "back.out(1.7)",
+          });
         }, 500);
       }
     } catch (error) {
@@ -54,6 +62,21 @@ export default function FormLogin() {
     <>
       {/* Div to make transition when login is successful */}
       <div className="transition">
+        {/* SVG check */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="100"
+          height="100"
+          fill="currentColor"
+          className="bi bi-check-circle"
+          viewBox="0 0 16 16"
+          color="green"
+        >
+          <path
+            fillRule="evenodd"
+            d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zm3.854 5.146a.5.5 0 0 0-.708-.708L7 9.293 5.854 8.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l4-4z"
+          />
+        </svg>
         <h1>Success</h1>
         <p>You have successfully logged in!</p>
       </div>

@@ -3,7 +3,6 @@ import { useState } from "react";
 import "../CSS/FormRegister.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 import { gsap } from "gsap";
 
 export default function FormRegister() {
@@ -45,14 +44,27 @@ export default function FormRegister() {
         localStorage.setItem("access_token", response.data.access_token);
         setTimeout(() => {
           // Animate the transition with gsap
-          gsap.to(".RegisterTextContainer", {
-            duration: 1,
-            opacity: 0,
-            onComplete: () => {
-              navigate("/Home");
+          gsap.fromTo(
+            ".transition",
+            {
+              // y: "-100vh",
+              top: "57rem",
+              duration: 2,
+              opacity: 1,
+              zIndex: 1,
             },
-          });
-        }, 2000);
+            {
+              top: "0",
+              duration: 2,
+              opacity: 1,
+              zIndex: 1,
+              ease: "back.out(1.7)",
+              onComplete: () => {
+                navigate("/");
+              },
+            }
+          );
+        }, 500);
       }
     } catch (error) {
       console.error(error);
@@ -61,6 +73,24 @@ export default function FormRegister() {
 
   return (
     <div className="RegisterTextContainer">
+      <div className="transition">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="100"
+          height="100"
+          fill="currentColor"
+          className="bi bi-check-circle"
+          viewBox="0 0 16 16"
+          color="green"
+        >
+          <path
+            fillRule="evenodd"
+            d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zm3.854 5.146a.5.5 0 0 0-.708-.708L7 9.293 5.854 8.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l4-4z"
+          />
+        </svg>
+        <h1>Success</h1>
+        <p>You have successfully registered!</p>
+      </div>
       <h1>Join the Brigade</h1>
       <form action="" method="POST" onSubmit={handleSubmit}>
         <div className="InputContainer">
