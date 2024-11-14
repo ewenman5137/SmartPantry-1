@@ -33,14 +33,20 @@ DB_USERNAME=root
 DB_PASSWORD=root (mac)// or empty (windows)
 ```
 
-6. Seeder la base de données => php artisan db:seed --class=ProduitSeeder && php artisan db:seed --class=DatabaseSeeder
+6. Créer la base de données dans phpMyAdmin => API_SmartPantry
 
-7. Lancer le serveur => php artisan serve
+7. Créer la base de données => php artisan migrate
 
-8. Aller dans le dossier client => cd client
+8. Seeder la base de données => php artisan db:seed --class=ProduitSeeder && php artisan db:seed --class=DatabaseSeeder
 
-9. Installer les dépendances => npm install
+9. Lancer le serveur => php artisan serve
 
-10. Lancer le serveur => npm run dev
+10. Ouvrir un autre terminal
 
-11. Ouvrir le navigateur et aller à l'adresse http://localhost:3000
+11. Aller dans le dossier client => cd client
+
+12. Installer les dépendances => npm install
+
+13. Lancer le serveur => npm run dev
+
+14. Ouvrir le navigateur et aller à l'adresse http://localhost:3000
