@@ -4,6 +4,7 @@ import "../CSS/FormRegister.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
+import RegisterBtn from "../../../Components/ui/btn/RegisterBtn";
 
 export default function FormRegister() {
   const [Name, setName] = useState("");
@@ -11,6 +12,7 @@ export default function FormRegister() {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -61,6 +63,7 @@ export default function FormRegister() {
               ease: "back.out(1.7)",
               onComplete: () => {
                 navigate("/");
+                e.target.reset();
               },
             }
           );
@@ -68,6 +71,12 @@ export default function FormRegister() {
       }
     } catch (error) {
       console.error(error);
+      // display error message
+      if (email === "" || password === "" || Name === "") {
+        alert("Please fill in all fields");
+      }
+      // clear the form
+      e.target.reset();
     }
   };
 
@@ -136,7 +145,7 @@ export default function FormRegister() {
         <div className="InputContainer">
           <label htmlFor="confirm">Confirm Password</label>
           <input
-            type={showPassword ? "text" : "password"}
+            type={showConfirmPassword ? "text" : "password"}
             id="confirm"
             name="confirm"
             className="input"
@@ -146,12 +155,10 @@ export default function FormRegister() {
           />
           <input
             type="checkbox"
-            onClick={() => setShowPassword(!showPassword)}
+            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
           />
         </div>
-        <div className="InputContainer">
-          <button type="submit">Sign In</button>
-        </div>
+        <RegisterBtn />
       </form>
     </div>
   );

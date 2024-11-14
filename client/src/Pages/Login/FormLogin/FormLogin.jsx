@@ -4,6 +4,7 @@ import axios from "axios";
 import "../CSS/FormLogin.css";
 import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
+import LoginBtn from "../../../Components/ui/btn/LoginBtn";
 
 export default function FormLogin() {
   const [email, setEmail] = useState("");
@@ -24,11 +25,9 @@ export default function FormLogin() {
       if (response.data) {
         localStorage.setItem("access_token", response.data.access_token);
         setTimeout(() => {
-          // Animate the transition with gsap tl
           gsap.fromTo(
             ".transition",
             {
-              // y: "-100vh",
               top: "57rem",
               duration: 1,
               opacity: 1,
@@ -54,15 +53,14 @@ export default function FormLogin() {
         }, 500);
       }
     } catch (error) {
-      console.error(error);
+      alert("Identifiants incorrects");
+      e.target.reset();
     }
   };
 
   return (
     <>
-      {/* Div to make transition when login is successful */}
       <div className="transition">
-        {/* SVG check */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="100"
@@ -82,7 +80,7 @@ export default function FormLogin() {
       </div>
       <div className="LoginTextContainer">
         <h1>Connexion</h1>
-        <form action="" method="POST" onSubmit={handleSubmit}>
+        <form action="" method="POST" onSubmit={handleSubmit} id="FormLogin">
           <div className="InputContainer">
             <label htmlFor="email">Email:</label>
             <input
@@ -111,9 +109,7 @@ export default function FormLogin() {
               onClick={() => setShowPassword(!showPassword)}
             />
           </div>
-          <div className="InputContainer">
-            <button type="submit">Sign Up</button>
-          </div>
+          <LoginBtn />
         </form>
       </div>
     </>
