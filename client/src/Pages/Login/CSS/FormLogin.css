@@ -23,6 +23,12 @@ body {
     width: 100%;
 }
 
+.ContainerLogin p#error {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
 .ContainerLogin .login {
     display: flex;
     flex-direction: row-reverse;

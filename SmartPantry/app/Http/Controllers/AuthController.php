@@ -63,6 +63,15 @@ class AuthController extends Controller
         ]);
     }
 
+    public function delete(Request $request)
+    {
+        $request->user()->delete();
+
+        return response()->json([
+            'message' => 'User deleted',
+        ]);
+    }
+
     public function user(Request $request)
     {
         return response()->json($request->user());
@@ -99,23 +108,6 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Email updated',
-        ]);
-    }
-
-    public function UpdateName(Request $request)
-    {
-        $validatedData = $request->validate([
-            'Name' => 'required|string|max:255',
-        ]);
-
-        $user = User::where('email', $request['email'])->firstOrFail();
-
-        $user->update([
-            'Name' => $validatedData['Name'],
-        ]);
-
-        return response()->json([
-            'message' => 'Name updated',
         ]);
     }
 }

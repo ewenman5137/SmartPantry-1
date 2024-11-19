@@ -15,3 +15,10 @@ Route::apiResource('produits', ProduitsController::class);
 Route::post('login', [AuthController::class, 'login']);
 // Register route
 Route::post('register', [AuthController::class, 'register']);
+
+// Update password route
+Route::middleware('auth-sanctum')->group(function () {
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::post('user/delete', [AuthController::class, 'delete']);
+    Route::post('user/updatePasword', [AuthController::class, 'UpdatePassword']);
+});

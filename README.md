@@ -18,11 +18,15 @@ SmartPantry est une application web qui permet de gérer son frigo et ses placar
 
 2. Sous Windows, ouvrir le terminal en Bash et se placer dans le dossier du projet => cd SmartPantry
 
-3. Installer les dépendances => composer install
+3. Si vous n'avez pas composer, télécharger le fichier composer.phar à la racine du projet => https://getcomposer.org/download/
 
-4. Creer un fichier .env => cp .env.example .env
+4. Installer les dépendances => php composer.phar install
 
-5. Copier le contenu dans le fichier .env
+5.
+
+6. Creer un fichier .env => cp .env.example .env
+
+7. Copier le contenu dans le fichier .env
 
 ```
 DB_CONNECTION=mysql

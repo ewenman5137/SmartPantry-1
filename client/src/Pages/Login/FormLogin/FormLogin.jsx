@@ -5,6 +5,8 @@ import "../CSS/FormLogin.css";
 import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import LoginBtn from "../../../Components/ui/btn/LoginBtn";
+import EmailInput from "../../../Components/ui/input/EmailInput";
+import PasswordInput from "../../../Components/ui/input/PasswordInput";
 
 export default function FormLogin() {
   const [email, setEmail] = useState("");
@@ -54,7 +56,8 @@ export default function FormLogin() {
       }
     } catch (error) {
       alert("Identifiants incorrects");
-      e.target.reset();
+      const errorDiv = document.getElementById("error");
+      errorDiv.innerText = "Identifiants incorrects";
     }
   };
 
@@ -80,35 +83,20 @@ export default function FormLogin() {
       </div>
       <div className="LoginTextContainer">
         <h1>Connexion</h1>
+        <div className="returnError">
+          <p id="error"></p>
+        </div>
         <form action="" method="POST" onSubmit={handleSubmit} id="FormLogin">
-          <div className="InputContainer">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              className="input"
-              name="email"
-              autoComplete="on"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="InputContainer">
-            <label htmlFor="password">Password:</label>
-            <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              className="input"
-              name="password"
-              autoComplete="on"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <input
-              type="checkbox"
-              onClick={() => setShowPassword(!showPassword)}
-            />
-          </div>
+          <EmailInput
+            onChange={(e) => setEmail(e.target.value)}
+            email={email}
+          />
+          <PasswordInput
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type={showPassword ? "text" : "password"}
+            onClick={() => setShowPassword(!showPassword)}
+          />
           <LoginBtn />
         </form>
       </div>
