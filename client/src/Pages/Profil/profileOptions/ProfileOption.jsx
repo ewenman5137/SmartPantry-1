@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import "../CSS/Profil.css";
+
 
 export default function ProfileOption() {
   const [ShowUpdateInput, setShowUpdateInput] = useState(false);
