@@ -1,6 +1,6 @@
 * {
-    padding: 0%;
-    margin: 0%;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     border: none;
     outline: none;
@@ -17,98 +17,91 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
     width: 100%;
+    background-color: #f9f7f5;
+    padding: 20px 0;
+    gap: 20px;
 }
 
-.profil {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.userPhotos img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-}
-
-.userInfo h1 {
-    font-size: 2rem;
+.containerProfil .profilTitle {
+    font-size: 1.5rem;
     font-weight: bold;
     color: #754F31;
-    margin-bottom: 0.5rem;
+    text-align: center;
 }
 
-.userInfo p {
+.containerProfil .userPhotos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.containerProfil .userPhotos img {
+    width: 100%;
+    height: auto;
+}
+
+
+.containerProfil .userInfo {
+    text-align: center;
+    color: #000;
     font-size: 1rem;
-    color: #555;
+}
+
+.containerProfil .userInfo h1 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.containerProfil .userInfo p {
+    font-size: 0.9rem;
+    color: #666;
 }
 
 .optionContainer {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 90%;
-    max-width: 400px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    width: 100%;
+    gap: 20px;
+    padding: 0 20px;
 }
 
 .optionContainer div {
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px 15px;
     font-size: 1rem;
     font-weight: bold;
-    color: white;
-    background-color: #754F31;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    color: #754F31;
 }
 
-button:hover {
-    background-color: #5b3c22;
-}
-
-form {
-    width: 100%;
-}
-
-form input {
-    display: block;
-    width: 100%;
-    margin: 10px 0;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-form button {
-    padding: 10px 15px;
+.optionContainer div span {
+    color: #754F31;
     font-size: 1rem;
     font-weight: bold;
-    color: white;
-    background-color: #754F31;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s ease;
 }
 
-form button:hover {
+.optionContainer div button {
+    background-color: #754F31;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.optionContainer div button:hover {
     background-color: #5b3c22;
+    transform: scale(1.05);
 }

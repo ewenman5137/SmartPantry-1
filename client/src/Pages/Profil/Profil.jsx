@@ -1,32 +1,31 @@
 import React, { useState, useEffect } from "react";
 import ProfileOption from "./profileOptions/profileOption";
+import profilImg from "../Profil/IMG/profil.png";
 
 export default function Profil() {
-  const [Name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
 
   useEffect(() => {
-    const storedName = localStorage.getItem("Name");
-    const storedEmail = localStorage.getItem("email");
+    const storedName = localStorage.getItem("Name") || "Prénom NOM DE FAMILLE";
 
     setName(storedName);
-    setEmail(storedEmail);
   }, []);
 
   return (
     <div className="containerProfil">
-      <div className="profil">
-        <div className="userInfo">
-          <h1>{`${Name}`}</h1>
-          <p>{email}</p>
-        </div>
+      <div className="profilTitle">Profil</div>
+      <div className="userPhotos">
+        <img
+          src={profilImg}
+          alt="Profil"
+          draggable="false"
+          onContextMenu={(e) => e.preventDefault()}
+        />
       </div>
-      <ProfileOption
-        Name={Name}
-        email={email}
-        setName={setName}
-        setEmail={setEmail}
-      />
+      <div className="userInfo">
+        <h1>{name}</h1>
+      </div>
+      <ProfileOption />
     </div>
   );
 }
